@@ -11,7 +11,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        "git 'https://github.com/anantshindalkar/react-tasks.git'"
+        git 'https://github.com/anantshindalkar/react-tasks.git'
       }
     }
 
