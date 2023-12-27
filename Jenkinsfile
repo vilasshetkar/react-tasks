@@ -1,41 +1,16 @@
 pipeline {
-
-  environment {
-    dockerimagename = "anantshindalkar/react-tasks"
-    dockerImage = ""
-  }
-
-  agent any
-
-  stages {
-
-    stage('Checkout Source') {
-      steps {
-        git 'https://github.com/anantshindalkar/react-tasks.git'
-      }
-    }
-
-    stage('Build image') {
-      steps{
-        script {
-          dockerImage = docker.build dockerimagename
+    agent {
+        docker {
+            label 'docker'
+            image 'nodeReact:0.1-nodejs'
         }
-      }
     }
-
-    stage('Pushing Image') {
-      environment {
-               registryCredential = 'dockerhublogin'
-           }
-      steps{
-        script {
-          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
-          }
+	    stages {
+        stage('Build') {
+            steps {
+                echo 'Build activity done'
+            }
         }
-      }
-    }
-
-  }
-
+		}
+	
 }
