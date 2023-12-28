@@ -1,16 +1,22 @@
 pipeline {
-    agent {
-        docker {
-            label 'docker'
-            image 'nodeReact:0.1-nodejs'
-        }
-    }
-	    stages {
+    agent any
+    stages {
+        
+		stage('Preparation') {
+		    steps {
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/anantshindalkar/react-tasks.git'
+		    }
+       }
         stage('Build') {
             steps {
-                echo 'Build activity done'
+                sh'npm install'
+                sh'npm run build'
             }
         }
-		}
-	
+        stage('Deploy') {
+            steps {
+                echo 'Deploying'
+            }
+        }
+    }
 }
