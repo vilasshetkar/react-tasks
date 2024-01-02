@@ -1,6 +1,6 @@
 pipeline {
     environment {
-	    	name = "React Tasks"
+	    	name = "ReactTasks"
 		registry = "vilasshetkar/test"
 		registryCredential = 'dockerhub_vilasshetkar'
 		dockerImage = ''
