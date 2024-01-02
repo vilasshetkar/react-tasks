@@ -1,5 +1,6 @@
 pipeline {
     environment {
+	    	name = "React Tasks"
 		registry = "vilasshetkar/test"
 		registryCredential = 'dockerhub_vilasshetkar'
 		dockerImage = ''
@@ -33,7 +34,10 @@ pipeline {
 
 		stage('04 Start Docker Container') {
 			steps{
-				sh "docker run -dp 80:80 $registry:$BUILD_NUMBER"
+				echo 'deploying on another server'
+            			sh 'docker stop $name || true'
+            			sh 'docker rm $name || true'
+				sh "docker run -dp 80:80 --name $name $registry:$BUILD_NUMBER"
 			}
 		}
 	}
